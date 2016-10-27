@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source .machines
+
+for MACHINE in "${MACHINES[@]}"; do
+  docker-machine create --driver virtualbox $MACHINE
+done

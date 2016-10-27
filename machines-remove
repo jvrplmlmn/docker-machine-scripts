@@ -1,0 +1,7 @@
+#!/bin/bash
+
+source .machines
+
+for MACHINE in "${MACHINES[@]}"; do
+  docker-machine rm --force $MACHINE
+done

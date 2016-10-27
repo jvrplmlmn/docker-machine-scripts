@@ -1,0 +1,4 @@
+#!/bin/bash
+
+MACHINE="${1}"
+eval $(docker-machine env ${MACHINE}) && docker-machine ssh ${MACHINE}
