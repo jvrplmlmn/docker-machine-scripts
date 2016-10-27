@@ -1,0 +1,3 @@
+MANAGERS=(manager1 manager2 manager3)
+WORKERS=(worker1 worker2 worker3)
+MACHINES=("${MANAGERS[@]}" "${WORKERS[@]}")
