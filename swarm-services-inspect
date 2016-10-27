@@ -1,0 +1,9 @@
+#!/bin/bash
+
+SERVICE="${1}"
+source .machines
+MANAGER="${MANAGERS[0]}"
+
+IP_MANAGER=`docker-machine ip ${MANAGER}`
+
+eval $(docker-machine env ${MANAGER}) && docker-machine ssh ${MANAGER} -- docker service inspect --pretty ${SERVICE}
