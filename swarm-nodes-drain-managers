@@ -1,0 +1,11 @@
+#!/bin/bash
+
+source .machines
+
+# By default manager nodes also act as a worker nodes
+# However, because manager nodes use the Raft consensus algorithm to replicate data in a consistent way, they are sensitive to resource starvation. 
+
+for MANAGER in "${MANAGERS[@]}"; do
+  echo "[INFO] Attempting to drain ${MANAGER} from Docker Swarm"
+  eval $(docker-machine env ${MANAGER}) && docker-machine ssh ${MANAGER} -- docker node update --availability drain ${MANAGER}
+done
