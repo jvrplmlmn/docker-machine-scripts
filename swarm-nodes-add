@@ -1,0 +1,14 @@
+#!/bin/bash
+
+source .machines
+MANAGER="${MANAGERS[0]}"
+
+IP_MANAGER=`docker-machine ip ${MANAGER}`
+SWARM_TOKEN=`./swarm-get-token-worker`
+
+for WORKER in "${WORKERS[@]}"; do
+  echo "[INFO] Attempting to join ${WORKER} to Docker Swarm manager at ${IP_MANAGER}"
+  eval $(docker-machine env ${WORKER}) && docker-machine ssh ${WORKER} -- docker swarm join --token ${SWARM_TOKEN} ${IP_MANAGER}:2377
+  echo
+done
+
